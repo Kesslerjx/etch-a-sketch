@@ -1,3 +1,6 @@
+const MIN = 16;
+const MAX = 100;
+
 //Get the grid container
 const gridContainer = document.querySelector('.grid-container');
 
@@ -13,18 +16,27 @@ const changeButton = document.querySelector('#set-grid-size');
 changeButton.addEventListener('click', changeGrid);
 
 //Draw grid
-drawGrid(50);
+drawGrid(16);
 
 function changeGrid() {
-    
+
+    //Only change grid if input is within 16 and 100
+    if (gridSize.value >= 16 && gridSize.value <= 100) {
+        //Remove divs
+        while(gridContainer.firstElementChild) {
+            gridContainer.removeChild(gridContainer.lastElementChild);
+        }
+        
+        //redraw grid
+        drawGrid(gridSize.value);
+    }
 }
 
 function drawGrid(number) {
     //Get height and width of the squares
     let containerWidth = gridContainer.clientWidth; //Using clientWidth to not include border
-    let boxMargin = 1;
     let borderWidth = 1;
-    let sideLength = (containerWidth / number) - (boxMargin * 2);
+    let sideLength = (containerWidth / number);
     let numOfBoxes = number * number;
 
     console.log(containerWidth);
@@ -38,10 +50,8 @@ function drawGrid(number) {
         //Style the div
         div.style.width = `${sideLength}px`;
         div.style.height = `${sideLength}px`;
-        div.style.margin = `${boxMargin}px`;
-        div.style.border = `${borderWidth}px solid black`; 
+        div.style.border = `${borderWidth}px solid black`;
         div.style.boxSizing = "border-box"; //Border box to account for padding and border
-        div.setAttribute('id', i);
 
         //Add event listener for hover
         div.addEventListener('mouseover', function(event) {
