@@ -15,13 +15,31 @@ clearButton.addEventListener('click', clearGrid);
 const changeButton = document.querySelector('#set-grid-size');
 changeButton.addEventListener('click', changeGrid);
 
+//Setup reset button
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', resetGrid);
+
 //Draw grid
 drawGrid(16);
+
+function resetGrid() {
+
+    console.log("Resetting grid back to 16");
+
+    //Set value
+    gridSize.value = 16;
+
+    //Change grid
+    changeGrid();
+}
 
 function changeGrid() {
 
     //Only change grid if input is within 16 and 100
     if (gridSize.value >= 16 && gridSize.value <= 100) {
+
+        console.log("Changing grid size to " + gridSize.value);
+
         //Remove divs
         while(gridContainer.firstElementChild) {
             gridContainer.removeChild(gridContainer.lastElementChild);
@@ -33,14 +51,14 @@ function changeGrid() {
 }
 
 function drawGrid(number) {
+
+    console.log("Drawing grid based on " + number);
+
     //Get height and width of the squares
     let containerWidth = gridContainer.clientWidth; //Using clientWidth to not include border
     let borderWidth = 1;
     let sideLength = (containerWidth / number);
     let numOfBoxes = number * number;
-
-    console.log(containerWidth);
-    console.log(sideLength);
 
     //Create array of div elements
     for(i=0; i < numOfBoxes; i++) {
@@ -65,6 +83,9 @@ function drawGrid(number) {
 }
 
 function clearGrid() {
+
+    console.log("Clearing grid");
+
     //Get all boxes within the grid container
     const boxes = gridContainer.querySelectorAll("*");
 
