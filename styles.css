@@ -11,6 +11,18 @@ body {
     justify-content: center;
 }
 
+#grid-size {
+    padding: 10px;
+}
+
+#set-grid-size {
+    margin: 10px;
+}
+
+#clear {
+    margin: 10px;
+}
+
 .grid-container {
     display: flex;
     flex-wrap: wrap;
