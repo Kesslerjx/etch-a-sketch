@@ -1,6 +1,8 @@
 const MIN = 16;
 const MAX = 100;
 
+let rgb = false;
+
 //Get the grid container
 const gridContainer = document.querySelector('.grid-container');
 
@@ -18,6 +20,21 @@ changeButton.addEventListener('click', changeGrid);
 //Setup reset button
 const resetButton = document.querySelector('#reset');
 resetButton.addEventListener('click', resetGrid);
+
+//Setup RGB button
+const rgbButton = document.querySelector('#rgb');
+rgbButton.addEventListener('click', function(event) {
+
+    if(rgb) {
+        rgb = false;
+        event.target.textContent = "RGB";
+    } else {
+        rgb = true;
+        event.target.textContent = "Black/White";
+    }
+
+    console.log(rgb);
+});
 
 //Draw grid
 drawGrid(16);
@@ -72,10 +89,7 @@ function drawGrid(number) {
         div.style.boxSizing = "border-box"; //Border box to account for padding and border
 
         //Add event listener for hover
-        div.addEventListener('mouseover', function(event) {
-            //Change color of the box
-            event.target.style.backgroundColor = "black";
-        });
+        div.addEventListener('mouseover', changeColor);
 
         //Append to grid container
         gridContainer.append(div);
@@ -91,4 +105,17 @@ function clearGrid() {
 
     //Set color back to white
     boxes.forEach(box => box.style.backgroundColor = "white");
+}
+
+//Change color of the box within the grid
+function changeColor(event) {
+
+    if(rgb) {
+        var randomColor = Math.floor(Math.random()*16777215).toString(16);
+        event.target.style.backgroundColor = "#" + randomColor;
+    } else {
+        event.target.style.backgroundColor = "black";
+    }
+
+
 }
