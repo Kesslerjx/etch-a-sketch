@@ -11,16 +11,10 @@ body {
     justify-content: center;
 }
 
-#grid-size {
+.user-input-container {
+    display: flex;
     padding: 10px;
-}
-
-#set-grid-size {
-    margin: 10px;
-}
-
-#clear {
-    margin: 10px;
+    gap: 20px;
 }
 
 .grid-container {
